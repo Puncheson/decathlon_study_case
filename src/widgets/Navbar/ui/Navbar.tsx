@@ -21,7 +21,7 @@ export const Navbar = ({ className } : INavbarProps) => {
             <Button  onClick={toggleTheme}>
             <SvgIcon component={moon} inheritViewBox /> 
             </Button>
-            <SvgIcon component={logo} sx={{ fontSize: 140 }} inheritViewBox/>
+            <SvgIcon component={logo} sx={{ fontSize: 120, height: 40 }} inheritViewBox/>
             <div className={cls.links}>
                 
                 <AppLink to={'/'} className={cls.mainLink}>Main</AppLink>
