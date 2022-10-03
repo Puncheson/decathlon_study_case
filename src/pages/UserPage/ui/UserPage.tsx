@@ -6,7 +6,7 @@ const UserPage = () => {
             <div >
                 1User!
             </div>
-            </MainLayout>
+        </MainLayout>
     );
 };
 

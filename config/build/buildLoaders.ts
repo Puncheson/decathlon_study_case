@@ -29,12 +29,16 @@ export function buildLoaders({isDev}: IBuildOptions): RuleSetRule[] {
         use: 'ts-loader',
         exclude: /node_modules/,
     }
-  
+    
+    const svgLoader = {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],  
+    }
 
     return  [
         typescriptLoader,
         cssLoader,
-
+        svgLoader,
         
       ]
 }
