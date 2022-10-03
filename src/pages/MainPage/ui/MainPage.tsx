@@ -1,9 +1,14 @@
 
+import { MainLayout } from "widgets/Layout/ui/MainLayout"
+
 const MainPage = () => {
+
     return (
-        <div>
-            MainPage!!!
-        </div>
+           <MainLayout> 
+                <div >
+
+                </div>
+            </MainLayout>
     );
 };
 

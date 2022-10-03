@@ -1,9 +1,12 @@
+import { MainLayout } from "widgets/Layout/ui/MainLayout";
 
 const UsersPage = () => {
     return (
-        <div>
-            Users!!!
-        </div>
+        <MainLayout> 
+            <div >
+                users!
+            </div>
+        </MainLayout>
     );
 };
 

@@ -1,1 +1,1 @@
-export { UserPage} from './ui/UserPage'
+export {UserPageAsync as UserPage} from './ui/UserPage.async'

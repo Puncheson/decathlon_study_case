@@ -1,8 +1,12 @@
-export const UserPage = () => {
+import { MainLayout } from "widgets/Layout/ui/MainLayout";
+
+const UserPage = () => {
     return (
-        <div>
-            User!!!
-        </div>
+        <MainLayout> 
+            <div >
+                1User!
+            </div>
+            </MainLayout>
     );
 };
 
