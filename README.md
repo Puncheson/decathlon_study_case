@@ -11,3 +11,14 @@ For such a small project, I think its use is redundant. But it lays great opport
 The project structure may seem confusing, but when solving business problems, this decomposition should be useful.
 
 If necessary, I can rewrite the project structure.
+
+└── src/
+    ├── app/                    # Initializing application logic
+    |    ├── index.tsx          #    Entrypoint for connecting the application (formerly App. tsx)
+    |    └── index.css          #    Global application styles
+    ├── pages/                  #
+    ├── widgets/                #
+    ├── features/               #
+    ├── entities/               #
+    ├── shared/                 #
+    └── index.tsx               # Connecting and rendering the application
