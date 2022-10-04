@@ -10,6 +10,7 @@ export const getPosts = async (query: {page: number, limit: number}): Promise<TP
       ({ data }) => data
     );
   } catch (err) {
+    console.log(err)
     return err;
   }
 };

@@ -18,7 +18,7 @@ export const UserList = ({ className } : IUserListProps) => {
 
     const [isUsersLoading, setUsersLoading] = useState(false)
     const [users, setUsers] = useState<TUser[]>([])
-   
+    const [isError, setIsError] = useState(false)
     
     const [pagination,setPagination] = useState({
         pageNumber: 1,
@@ -31,14 +31,19 @@ export const UserList = ({ className } : IUserListProps) => {
     const handleGetUsers = () => {
         setUsersLoading(true)
         getUsers({page: pagination.pageNumber, limit: pagination.limit}).then(res => {
-            setUsers(res.data)
-            setPagination({
-                pageNumber: pagination.pageNumber,
-                totalPages: Math.floor(res.total / res.limit),
-                limit: res.limit
-            })
-            
+            if(res?.data) {
+                setUsers(res.data)
+                setPagination({
+                    pageNumber: pagination.pageNumber,
+                    totalPages: Math.floor(res.total / res.limit),
+                    limit: res.limit
+                })
+                setUsersLoading(false)
+            } else {
+                setIsError(true)
             setUsersLoading(false)
+            }
+            
         })
     }
 
@@ -52,14 +57,15 @@ return (
         <div 
         className={classNames(cls.UserList, {}, [className])}>
        {
-       searchedUsers(users, inputValue.value).length ? 
+       searchedUsers(users, inputValue.value)?.length ? 
        searchedUsers(users, inputValue.value).map(user=> {
         return <TableCard key={user.id} user={user}/>
        }) : 
        inputValue.value.length ? 
        <div className={cls.notification}>There is no users found with this query. You can try to find user on another page!</div>  : 
        isUsersLoading  ? 
-       <div className={cls.notification}>Looking for users...</div> : <div className={cls.notification}>No users found</div>} 
+       <div className={cls.notification}>Looking for users...</div> : isError ? <div className={cls.notification}>Oops! Error! Please try again later.</div> 
+       : <div className={cls.notification}>No users found</div>} 
     </div>
 
     

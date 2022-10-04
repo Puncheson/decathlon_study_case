@@ -12,6 +12,7 @@ import { searchedPosts } from 'features/lib';
 import { useObserver } from 'shared/lib';
 
 
+
 interface  IPostListProps {
     className?: string
 }
@@ -21,15 +22,11 @@ export const PostList = ({ className } : IPostListProps) => {
     const [isPostsLoading, setPostsLoading] = useState(false)
     const [posts, setPosts] = useState<TPost[]>([])
     const lastElement = useRef()
-
+    const [isError, setIsError] = useState(false)
 
     const [pageNumber, setPageNumber] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
 
- 
-   
-    
-    
     const inputValue = useInput('')
 
     const handleGetPosts = () => {
@@ -37,6 +34,9 @@ export const PostList = ({ className } : IPostListProps) => {
         getPosts({page: pageNumber, limit: 10}).then(res => {
             setPosts([...posts, ...res.data])
             setTotalPages(Math.round(res.total / res.limit))
+            setPostsLoading(false)
+        }).catch(()=> {
+            setIsError(true)
             setPostsLoading(false)
         })
     }
@@ -61,9 +61,13 @@ return (
         <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px' }} id="outlined-basic" label="Search loaded posts" variant="outlined" />
    
     <div className={classNames(cls.PostList, {}, [className])}>
-        {searchedPosts(posts, inputValue.value).length ? searchedPosts(posts, inputValue.value).map((post) => {
+        {searchedPosts(posts, inputValue.value)?.length ? searchedPosts(posts, inputValue.value).map((post) => {
             return <PostCard key={post.id} post={post}/>
-        }) : inputValue.value.length? <div>There is no posts found with this query. You can load more posts and try to search again!</div> : isPostsLoading ? <div>Looking for posts</div> : <div>No posts found</div>}
+        }) : inputValue.value.length ? 
+        <div>There is no posts found with this query. You can load more posts and try to search again!</div> 
+         : isPostsLoading ? <div>Looking for posts</div>
+         : isError ? <div>Oops...error, please try again later</div> 
+         : <div>No posts found</div>}
         
     </div>
     {isPostsLoading ? <LinearProgress  /> : <></>}

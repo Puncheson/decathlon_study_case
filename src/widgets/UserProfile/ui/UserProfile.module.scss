@@ -1,6 +1,12 @@
 .UserProfile {
-    margin-top: 100px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.error {
+    margin-top: 130px;
+    font-style: var(--font-size-l);
+    font-weight: 900;
 }

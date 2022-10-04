@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { getPosts, TPost } from 'shared/api';
+import { useState } from 'react';
+import { TPost } from 'shared/api';
 import { classNames } from 'shared/lib/classNames/classNames';
 
 
@@ -8,6 +8,8 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Skeleton from '@mui/material/Skeleton'
 import like from 'shared/svg/like.svg'
 import { dateTransformer } from 'shared/lib/dateTransformer/dateTransformer';
+import { useNavigate } from 'react-router-dom';
+
 
 interface  IPostCardProps {
 className?: string,
@@ -16,13 +18,15 @@ post: TPost
 
 export const PostCard = ({ className, post } : IPostCardProps) => {
 
+    const navigate = useNavigate()
+
     const [isImageLoad, setIsImageLoad] = useState(false)
     
 return (
     
     <div className={classNames(cls.PostCard, {}, [className])}>
        {post ?  <>
-            <div className={cls.PostCard__header} onClick={() =>console.log(post.owner.id)} >
+            <div className={cls.PostCard__header} onClick={() => navigate(`user/${post.owner.id}`)} >
                 <img className={cls.userImage}  src={post.owner.picture} alt="userImage" />
                 <div className={cls.userName}>
                     <span>{post.owner.title}</span>

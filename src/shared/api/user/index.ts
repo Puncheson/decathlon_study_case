@@ -10,6 +10,7 @@ export const getUsers = async (query: {page: number, limit: number}): Promise<TU
       ({ data }) => data
     );
   } catch (err) {
+    console.log(err)
     return err;
   }
 };
