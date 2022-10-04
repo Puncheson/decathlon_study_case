@@ -8,7 +8,8 @@ import { IBuildOptions } from './types/config';
 export function buildPlugins({paths}:IBuildOptions): webpack.WebpackPluginInstance[] {
     return [ 
         new  HtmlWebpackPlugin({
-            template: paths.html
+            template: paths.html,
+            favicon: "./src/favicon.svg"
         }), 
         new webpack.ProgressPlugin(),
         new MiniCssExtractPlugin({

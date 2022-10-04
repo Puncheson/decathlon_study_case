@@ -1,2 +1,2 @@
-export { searchedPosts } from "./searchedPosts/searchedPosts";
+export { searchedPostsFunc } from "./searchedPosts/searchedPosts";
 export {searchedUsers} from './searchedUsers/searchedUsers'

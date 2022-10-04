@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField'
 import cls from './PostList.module.scss'
 
 import useInput from 'shared/lib/useInput/useInput';
-import { searchedPosts } from 'features/lib';
+import { searchedPostsFunc } from 'features/lib';
 import { useObserver } from 'shared/lib';
 
 
@@ -58,10 +58,10 @@ export const PostList = ({ className } : IPostListProps) => {
 return (
     <>
     
-        <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px' }} id="outlined-basic" label="Search loaded posts" variant="outlined" />
+        <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px 0' }} id="outlined-basic" label="Search loaded posts" variant="outlined" />
    
     <div className={classNames(cls.PostList, {}, [className])}>
-        {searchedPosts(posts, inputValue.value)?.length ? searchedPosts(posts, inputValue.value).map((post) => {
+        {searchedPostsFunc(posts, inputValue.value)?.length ? searchedPostsFunc(posts, inputValue.value).map((post) => {
             return <PostCard key={post.id} post={post}/>
         }) : inputValue.value.length ? 
         <div>There is no posts found with this query. You can load more posts and try to search again!</div> 

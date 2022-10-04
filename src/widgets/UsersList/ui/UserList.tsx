@@ -53,7 +53,7 @@ export const UserList = ({ className } : IUserListProps) => {
     
 return (
     <>
-    <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px' }} id="outlined-basic" label="Search loaded users" variant="outlined" />
+    <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px 0' }} id="outlined-basic" label="Search loaded users" variant="outlined" />
         <div 
         className={classNames(cls.UserList, {}, [className])}>
        {
@@ -70,7 +70,8 @@ return (
 
     
     <div className={cls.pagination}>
-        {(pagination.totalPages > 1) && <Pagination  
+        {(pagination.totalPages > 1) && <Pagination
+        size="small"  
          page={pagination.pageNumber} 
          onChange={(_e,page)=> { 
             setPagination({...pagination,pageNumber: page})

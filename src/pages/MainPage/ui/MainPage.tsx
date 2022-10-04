@@ -1,6 +1,7 @@
 
 import { MainLayout } from "widgets/Layout/ui/MainLayout"
-import { PostList } from "widgets/PostList/ui/PostList";
+import { PostList } from "widgets/PostList";
+
 
 const MainPage = () => {
 
