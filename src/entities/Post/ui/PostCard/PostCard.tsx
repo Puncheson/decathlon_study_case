@@ -5,6 +5,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 
 import cls from './PostCard.module.scss'
 import SvgIcon from '@mui/material/SvgIcon';
+import Skeleton from '@mui/material/Skeleton'
 import like from 'shared/svg/like.svg'
 import { dateTransformer } from 'shared/lib/dateTransformer/dateTransformer';
 
@@ -14,13 +15,8 @@ post: TPost
 }
 
 export const PostCard = ({ className, post } : IPostCardProps) => {
-//    const [post, setPost] = useState<TPost>()
-    // useEffect(() => {
-    //     getPosts().then(data => {
-    //         setPost(data.data[0])
-    //     })
-        
-    // },[])
+
+    const [isImageLoad, setIsImageLoad] = useState(false)
     
 return (
     
@@ -35,7 +31,8 @@ return (
                 </div>
                 
             </div>  
-            <img title={post.id} className={cls.PostCard__postImage} src={post.image} alt={post.id}/>
+            {!isImageLoad && <Skeleton variant="rectangular" width={270} height={180} />}
+            <img onLoad={() => setIsImageLoad(true)} title={post.id} className={cls.PostCard__postImage} src={post.image} alt={post.id}/>
             <div className={cls.userLikes}><SvgIcon component={like} sx={{ fontSize: 20, height: 15 }} inheritViewBox/>{post.likes} {post.tags.map(tag => <span key={tag}>#{tag} </span>)}</div>
             <span className={cls.userText}> {post.text}</span>
             

@@ -1,12 +1,12 @@
-import { AxiosError } from 'axios';
+
 
 import  Axios  from '../axios' ;
 
 const ENDPOINT = '/post'
 
-export const getPosts = async (): Promise<TPosts> => {
+export const getPosts = async (query: {page: number, limit: number}): Promise<TPosts> => {
   try {
-    return await Axios.get(`${ENDPOINT}`).then(
+    return await Axios.get(`${ENDPOINT}?page=${query.page}&limit=${query.limit}`).then(
       ({ data }) => data
     );
   } catch (err) {

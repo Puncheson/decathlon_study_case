@@ -1,7 +1,6 @@
 .PostCard {
     border-radius: 10px;
     width: 300px;
-    height: 100%;
     min-height: 300px;
     max-height: 500px;
     background-color: var( --secondary-color);
@@ -11,9 +10,10 @@
     align-items: center;
     &__postImage {
         
-        max-height: 300px;
+        max-height: 200px;
         width: auto;
         max-width: 270px;
+      
     }
     &__header {
         display: flex;
