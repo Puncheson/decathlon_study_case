@@ -38,7 +38,7 @@ return (
             
             <div className={cls.date}>{dateTransformer(post.publishDate)}</div>
    
-       </> : <div>loading</div>}
+       </> : <div>loading...</div>}
     </div>
 );
 }
