@@ -15,7 +15,7 @@ export const getUsers = async (query: {page: number, limit: number}): Promise<TU
 };
 
 
-export const getUser = async (id:number | string): Promise<TUser[]> => {
+export const getUser = async (id:number | string): Promise<TUserProfile> => {
     try {
       return await Axios.get(`${ENDPOINT}/${id}`).then(
         ({ data }) => data
@@ -41,3 +41,24 @@ export type TUser = {
   picture: string
   title: string
 };
+
+export type TUserProfile  = {
+  firstName: string
+  id: string
+  lastName: string
+  picture: string
+  title: string
+  gender: string 
+  email: string
+  phone: string
+  dateOfBirth: string
+  registerDate:string 
+  updatedDate:string
+  location: {
+    city: string
+    country: string
+    state: string
+    street: string
+    timezone: string
+  }
+  }

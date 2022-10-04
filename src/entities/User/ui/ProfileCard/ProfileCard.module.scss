@@ -1,0 +1,44 @@
+.ProfileCard {
+    padding: 10px;
+    width: 100%;
+    min-height: 300px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+@media (max-width: 580px)  {
+    .userAdress {
+        align-items: center;
+    }
+    .userData {
+        align-items: center;
+    }
+}
+
+.userPhoto {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    gap: 10px;
+
+}
+.userData {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.userAdress {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    
+}
+.title {
+    font-size: var(--font-size-l);
+    text-transform: uppercase;
+}

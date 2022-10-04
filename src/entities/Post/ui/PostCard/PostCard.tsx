@@ -22,7 +22,7 @@ return (
     
     <div className={classNames(cls.PostCard, {}, [className])}>
        {post ?  <>
-            <div className={cls.PostCard__header}>
+            <div className={cls.PostCard__header} onClick={() =>console.log(post.owner.id)} >
                 <img className={cls.userImage}  src={post.owner.picture} alt="userImage" />
                 <div className={cls.userName}>
                     <span>{post.owner.title}</span>

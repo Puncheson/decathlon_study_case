@@ -8,7 +8,7 @@ import cls from './UserList.module.scss'
 import TextField from '@mui/material/TextField'
 import Pagination from '@mui/material/Pagination'
 import useInput from 'shared/lib/useInput/useInput';
-import { searchedUsers } from 'features/Post/lib/searchedPosts/searchedUsers';
+import { searchedUsers } from 'features/lib/searchedUsers/searchedUsers';
 
 
 interface  IUserListProps {
@@ -57,9 +57,9 @@ return (
         return <TableCard key={user.id} user={user}/>
        }) : 
        inputValue.value.length ? 
-       <div>There is no users found with this query. You can try to find user on another page!</div>  : 
+       <div className={cls.notification}>There is no users found with this query. You can try to find user on another page!</div>  : 
        isUsersLoading  ? 
-       <div>Looking for users...</div> : <div>No users found</div>} 
+       <div className={cls.notification}>Looking for users...</div> : <div className={cls.notification}>No users found</div>} 
     </div>
 
     

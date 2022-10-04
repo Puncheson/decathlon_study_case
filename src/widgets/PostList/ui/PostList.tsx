@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField'
 import cls from './PostList.module.scss'
 
 import useInput from 'shared/lib/useInput/useInput';
-import { searchedPosts } from 'features/Post/lib';
+import { searchedPosts } from 'features/lib';
 import { useObserver } from 'shared/lib';
 
 
