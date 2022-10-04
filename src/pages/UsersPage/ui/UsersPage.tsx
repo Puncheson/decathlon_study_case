@@ -1,11 +1,11 @@
+
 import { MainLayout } from "widgets/Layout/ui/MainLayout";
+import { UserList } from "widgets/UsersList";
 
 const UsersPage = () => {
     return (
         <MainLayout> 
-            <div >
-                users!
-            </div>
+           <UserList/>
         </MainLayout>
     );
 };

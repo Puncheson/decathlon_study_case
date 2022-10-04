@@ -1,12 +1,12 @@
-import { AxiosError } from 'axios';
+
 
 import  Axios  from '../axios' ;
 
 const ENDPOINT = '/user'
 
-export const getUsers = async (): Promise<TUser[] | AxiosError> => {
+export const getUsers = async (query: {page: number, limit: number}): Promise<TUsers> => {
   try {
-    return await Axios.get(`${ENDPOINT}`).then(
+    return await Axios.get(`${ENDPOINT}?page=${query.page}&limit=${query.limit}`).then(
       ({ data }) => data
     );
   } catch (err) {
@@ -15,7 +15,7 @@ export const getUsers = async (): Promise<TUser[] | AxiosError> => {
 };
 
 
-export const getUser = async (id:number | string): Promise<TUser[] | AxiosError> => {
+export const getUser = async (id:number | string): Promise<TUser[]> => {
     try {
       return await Axios.get(`${ENDPOINT}/${id}`).then(
         ({ data }) => data
@@ -26,9 +26,18 @@ export const getUser = async (id:number | string): Promise<TUser[] | AxiosError>
   };
 
 /* Types */
-type TUser = {
-  uid: string;
-  name: string;
-  email: string;
-  roles: { code: string; name: string }[];
+export type TUsers = {
+  data: TUser[],
+  total: number,
+  page: number,
+  limit: number
+}
+
+
+export type TUser = {
+  firstName: string
+  id: string
+  lastName: string
+  picture: string
+  title: string
 };

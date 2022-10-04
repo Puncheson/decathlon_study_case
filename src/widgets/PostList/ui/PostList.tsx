@@ -6,9 +6,10 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import LinearProgress from '@mui/material/LinearProgress'
 import TextField from '@mui/material/TextField'
 import cls from './PostList.module.scss'
-import { useObserver } from 'shared/lib/useObserver/useObserver';
-import { searchedPosts } from 'features/Post/lib/searchedPosts/searchedPosts';
+
 import useInput from 'shared/lib/useInput/useInput';
+import { searchedPosts } from 'features/Post/lib';
+import { useObserver } from 'shared/lib';
 
 
 interface  IPostListProps {
