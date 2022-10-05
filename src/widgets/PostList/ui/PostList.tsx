@@ -9,7 +9,8 @@ import cls from './PostList.module.scss'
 
 import useInput from 'shared/lib/useInput/useInput';
 import { searchedPostsFunc } from 'features/lib';
-import { useObserver } from 'shared/lib';
+import { useGetPosts, useObserver } from 'shared/lib';
+import { PostListNotifications } from '../lib/PostListNotifications';
 
 
 
@@ -19,58 +20,55 @@ interface  IPostListProps {
 
 export const PostList = ({ className } : IPostListProps) => {
 
-    const [isPostsLoading, setPostsLoading] = useState(false)
-    const [posts, setPosts] = useState<TPost[]>([])
     const lastElement = useRef()
-    const [isError, setIsError] = useState(false)
 
     const [pageNumber, setPageNumber] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
 
     const inputValue = useInput('')
 
-    const handleGetPosts = () => {
-        setPostsLoading(true)
-        getPosts({page: pageNumber, limit: 10}).then(res => {
-            setPosts([...posts, ...res.data])
-            setTotalPages(Math.round(res.total / res.limit))
-            setPostsLoading(false)
-        }).catch(()=> {
-            setIsError(true)
-            setPostsLoading(false)
-        })
-    }
+    const {posts, loading, error} = useGetPosts(
+        pageNumber, 
+        (total, limit) => {
+        setTotalPages(Math.round(total / limit))
+        },
+        inputValue.value
+    )
    
-   
-    useObserver(lastElement, pageNumber < totalPages && inputValue.value.length<1, isPostsLoading, ()=> {
+    useObserver(
+        lastElement,
+        pageNumber < totalPages && inputValue.value.length < 1,
+        loading, 
+        () => {
         setPageNumber(pageNumber + 1)
     } )
   
+    const setNotification = () => {
+        if(inputValue.value.length) {
+            return PostListNotifications.queryEmpty
+        } else if (loading) {
+            return PostListNotifications.search
+        } else if (error) {
+            return PostListNotifications.error
+        } else {
+            return PostListNotifications.empty
+        }
+    }
 
 
-    useEffect(() => {
-        handleGetPosts()
-    }, [pageNumber])
-
-
-  
-    
 return (
     <>
     
         <TextField  {...inputValue}  color='warning' sx={{width: '100%', margin: '15px 0' }} id="outlined-basic" label="Search loaded posts" variant="outlined" />
    
     <div className={classNames(cls.PostList, {}, [className])}>
-        {searchedPostsFunc(posts, inputValue.value)?.length ? searchedPostsFunc(posts, inputValue.value).map((post) => {
-            return <PostCard key={post.id} post={post}/>
-        }) : inputValue.value.length ? 
-        <div>There is no posts found with this query. You can load more posts and try to search again!</div> 
-         : isPostsLoading ? <div>Looking for posts</div>
-         : isError ? <div>Oops...error, please try again later</div> 
-         : <div>No posts found</div>}
-        
+        {
+            posts?.length ? posts.map((post) => {
+                return <PostCard key={post.id} post={post}/>
+            }) : <div>{setNotification()}</div>
+        }
     </div>
-    {isPostsLoading ? <LinearProgress  /> : <></>}
+    {loading ? <LinearProgress  /> : <></>}
     <div ref={lastElement} style={{height:20}}></div>
     </>
     
